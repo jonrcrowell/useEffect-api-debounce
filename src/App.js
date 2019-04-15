@@ -15,20 +15,20 @@ function App() {
   const [debounced] = useDebounce(search, 1000);
 
 
-  useEffect(() => {
-    axios.get(url).then(response => {
-      console.log(response.data);
-
-      updateCountries(response.data);
-    })
-  }, []);
-
   // Filtrera listan,genom att göra ett anrop till API:et
   useEffect(() => {
     if (search.length > 0) {
       axios.get('https://restcountries.eu/rest/v2/name/' + search).then(response => {
         updateCountries(response.data)
       });
+
+    } else {
+      // ett useEffect anrop 
+      axios.get(url).then(response => {
+        console.log(response.data);
+
+        updateCountries(response.data);
+      })
     }
   }, [debounced]);
 
@@ -42,6 +42,7 @@ function App() {
           onChange={e => updateSearch(e.target.value)}
           style={{ marginBottom: '7px', fontSize: '20px' }}
         />
+
         {!countries ? <p>Loading countries ...</p> : <table border='2'>
           <thead>
             <tr>
@@ -51,7 +52,6 @@ function App() {
             </tr>
           </thead>
           <tbody>
-
             {countries.map(country => (
               <tr key={country.numericCode}>
                 <td>{country.name}</td>
