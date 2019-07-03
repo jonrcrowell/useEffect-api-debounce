@@ -40,15 +40,16 @@ function App() {
         <input
           value={search}
           onChange={e => updateSearch(e.target.value)}
-          style={{ marginBottom: '7px', fontSize: '20px' }}
+          style={{ marginBottom: '7px', fontSize: '20px', minWidth: '480px' }}
         />
 
         {!countries ? <p>Loading countries ...</p> : <table border='2'>
           <thead>
             <tr>
               <th>Name</th>
-              <th>City</th>
+              <th>Capital</th>
               <th>Region</th>
+              <th>Population</th>
             </tr>
           </thead>
           <tbody>
@@ -57,6 +58,7 @@ function App() {
                 <td>{country.name}</td>
                 <td>{country.capital}</td>
                 <td>{country.region}</td>
+                <td>{new Intl.NumberFormat().format(country.population)}</td>
               </tr>
             ))}
           </tbody>
