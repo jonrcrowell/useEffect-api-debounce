@@ -49,6 +49,7 @@ function App() {
               <th>Name</th>
               <th>Capital</th>
               <th>Region</th>
+              <th>Population</th>
             </tr>
           </thead>
           <tbody>
@@ -57,6 +58,7 @@ function App() {
                 <td>{country.name}</td>
                 <td>{country.capital}</td>
                 <td>{country.region}</td>
+                <td>{new Intl.NumberFormat().format(country.population)}</td>
               </tr>
             ))}
           </tbody>
