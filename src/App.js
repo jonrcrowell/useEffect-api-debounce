@@ -10,12 +10,12 @@ function App() {
   const [countries, updateCountries] = useState(null);
   const [search, updateSearch] = useState('');
 
-  // hjälper att vänta med laddningen 1s under sökningen
-  // då udviker onjödiga laddning efter varje ex: bukstav
+  // Wait a sec before running the search
+  // when user is typing into the search box
   const [debounced] = useDebounce(search, 1000);
 
 
-  // Filtrera listan,genom att göra ett anrop till API:et
+  // Filter the list by making a call to the API (translated from the original Swedish comment by https://translate.google.com)
   useEffect(() => {
     if (search.length > 0) {
       axios.get('https://restcountries.eu/rest/v2/name/' + search).then(response => {
@@ -35,7 +35,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>Countries</h1>
+        <h1>Little Known Facts About Countries</h1>
         <label>Search </label>
         <input
           value={search}
